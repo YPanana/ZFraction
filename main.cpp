@@ -13,11 +13,21 @@ using namespace std;
 
 int main()
 {
-    ZFraction a(4,10), b(2,4), c(1,3), d(2), e;
+    ZFraction a(4,10), b(2,5), c(1,3), d(2), e;
     
     cout<<a<<" + "<<e<<" = "<<a+e<<endl;
     
     cout<<a<<" * "<<e<<" = "<<a*e<<endl;
+    
+    if (a < b) {
+        cout<<a<<" est inferieur a "<<b<<endl;
+    }
+    else if (a == b) {
+        cout<<a<<" est egal a "<<b<<endl;
+    }
+    else {
+        cout<<a<<" est superieur a "<<b<<endl;
+    }
 
     return 0;
 }
