@@ -13,8 +13,9 @@ class ZFraction {
     ZFraction(int n, int d);    //3.Numerateur et denominateur
     
     //Methodes publiques
-    //Afficher la fraction dans la console
-    void afficher(std::ostream &flux) const;
+    void afficher(std::ostream &flux)     const; //Afficher la fraction dans la console
+    bool estInferieur(ZFraction const& a) const; //Test si la fraction est inferieure a une autre
+    bool estEgal(ZFraction const& a)      const; //Test si la fraction est egale a une autre
     
     //Surcharge d'operateurs
     ZFraction& operator+=(ZFraction const& a);
@@ -33,8 +34,10 @@ class ZFraction {
 
 //Surcharge d'operateurs
 std::ostream& operator<<(std::ostream &flux, ZFraction const& fraction);
-ZFraction operator+(ZFraction const& a, ZFraction const& b);
-ZFraction operator*(ZFraction const& a, ZFraction const& b);
+ZFraction     operator+(ZFraction const& a, ZFraction const& b);
+ZFraction     operator*(ZFraction const& a, ZFraction const& b);
+bool          operator<(ZFraction const& a, ZFraction const& b);
+bool          operator==(ZFraction const& a, ZFraction const& b);
 
 //Fonction pour calculer le PGCD de 2 nombres
 int pgcd(int a, int b);
