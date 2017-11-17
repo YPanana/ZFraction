@@ -18,6 +18,7 @@ class ZFraction {
     
     //Surcharge d'operateurs
     ZFraction& operator+=(ZFraction const& a);
+    ZFraction& operator*=(ZFraction const& a);
     
     private:
     
@@ -31,11 +32,9 @@ class ZFraction {
 };
 
 //Surcharge d'operateurs
-//Flux d'affichage
 std::ostream& operator<<(std::ostream &flux, ZFraction const& fraction);
-
-//Addition
 ZFraction operator+(ZFraction const& a, ZFraction const& b);
+ZFraction operator*(ZFraction const& a, ZFraction const& b);
 
 //Fonction pour calculer le PGCD de 2 nombres
 int pgcd(int a, int b);
