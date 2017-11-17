@@ -28,6 +28,16 @@ void ZFraction::afficher(ostream &flux) const {
     flux<<m_numerateur<<'/'<<m_denominateur;
 }
 
+//Test si la fraction est inferieure a une autre
+bool ZFraction::estInferieur(ZFraction const& a) const {
+    return (m_numerateur*a.m_denominateur < a.m_numerateur*m_denominateur);
+}
+
+//Test si la fraction est egale a une autre
+bool ZFraction::estEgal(ZFraction const& a) const {
+    return (m_numerateur*a.m_denominateur == a.m_numerateur*m_denominateur);
+}
+
 //Surcharge d'operateurs (membres de la classe)
 ZFraction& ZFraction::operator+=(ZFraction const& a) {
     
@@ -72,6 +82,14 @@ ZFraction operator*(ZFraction const& a, ZFraction const& b) {
     ZFraction copieA(a);
     copieA *= b;
     return copieA;
+}
+
+bool operator<(ZFraction const& a, ZFraction const& b) {
+    return a.estInferieur(b);
+}
+
+bool operator==(ZFraction const& a, ZFraction const& b) {
+    return a.estEgal(b);
 }
 
 //Fonctions exterieures
