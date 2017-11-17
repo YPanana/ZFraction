@@ -16,6 +16,8 @@ int main()
     ZFraction a(4,10), b(2,4), c(1,3), d(2), e;
     
     cout<<a<<" + "<<e<<" = "<<a+e<<endl;
+    
+    cout<<a<<" * "<<e<<" = "<<a*e<<endl;
 
     return 0;
 }

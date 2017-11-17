@@ -29,7 +29,6 @@ void ZFraction::afficher(ostream &flux) const {
 }
 
 //Surcharge d'operateurs (membres de la classe)
-//+=
 ZFraction& ZFraction::operator+=(ZFraction const& a) {
     
     //a/b + c/d = a*d+c*b/b*d
@@ -38,6 +37,13 @@ ZFraction& ZFraction::operator+=(ZFraction const& a) {
     simplifierFraction();
     
     return *this;
+}
+
+ZFraction& ZFraction::operator*=(ZFraction const& a) {
+    //a/b * c/d = a*c/b*d
+    m_numerateur   *= a.m_numerateur;
+    m_denominateur *= a.m_denominateur;
+    simplifierFraction();
 }
 
 //Methodes privees
@@ -51,16 +57,20 @@ void ZFraction::simplifierFraction() {
 }
 
 //Surcharges d'operateurs (non membres de la classe)
-//Flux d'affichage
 ostream &operator<<(ostream &flux, ZFraction const& fraction) {
     fraction.afficher(flux);
     return flux;
 }
 
-//Addition
 ZFraction operator+(ZFraction const& a, ZFraction const& b) {
     ZFraction copieA(a); //Copie de a
     copieA += b;
+    return copieA;
+}
+
+ZFraction operator*(ZFraction const& a, ZFraction const& b) {
+    ZFraction copieA(a);
+    copieA *= b;
     return copieA;
 }
 
