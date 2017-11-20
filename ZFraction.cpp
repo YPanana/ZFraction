@@ -88,8 +88,24 @@ bool operator<(ZFraction const& a, ZFraction const& b) {
     return a.estInferieur(b);
 }
 
+bool operator>(ZFraction const& a, ZFraction const& b) {
+    return b.estInferieur(a);
+}
+
+bool operator<=(ZFraction const& a, ZFraction const& b) {
+    return !b.estInferieur(a);
+}
+
+bool operator>=(ZFraction const& a, ZFraction const& b) {
+    return !a.estInferieur(b);
+}
+
 bool operator==(ZFraction const& a, ZFraction const& b) {
     return a.estEgal(b);
+}
+
+bool operator!=(ZFraction const& a, ZFraction const& b) {
+    return !a.estEgal(b);
 }
 
 //Fonctions exterieures
