@@ -37,7 +37,11 @@ std::ostream& operator<<(std::ostream &flux, ZFraction const& fraction);
 ZFraction     operator+(ZFraction const& a, ZFraction const& b);
 ZFraction     operator*(ZFraction const& a, ZFraction const& b);
 bool          operator<(ZFraction const& a, ZFraction const& b);
+bool          operator>(ZFraction const& a, ZFraction const& b);
+bool          operator>=(ZFraction const& a, ZFraction const& b);
+bool          operator<=(ZFraction const& a, ZFraction const& b);
 bool          operator==(ZFraction const& a, ZFraction const& b);
+bool          operator!=(ZFraction const& a, ZFraction const& b);
 
 //Fonction pour calculer le PGCD de 2 nombres
 int pgcd(int a, int b);
