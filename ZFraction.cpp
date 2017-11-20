@@ -2,20 +2,7 @@
 
 using namespace std;
 
-//Constructeurs
-//1.Par defaut : numerateur initialise a 0, denominateur a 1.
-ZFraction::ZFraction() : m_numerateur(0), m_denominateur(1)
-{
-    
-}
-
-//2.Juste le numerateur : numerateur prend la valeur donnee, denominateur initialise a 1.
-ZFraction::ZFraction(int n) : m_numerateur(n), m_denominateur(1)
-{
-    
-}
-
-//3.Numerateur et denominateur : numerateur et denominateur prennent les valeurs donnees.
+//Constructeur
 ZFraction::ZFraction(int n, int d) : m_numerateur(n), m_denominateur(d)
 {
     simplifierFraction();
@@ -38,14 +25,38 @@ bool ZFraction::estEgal(ZFraction const& a) const {
     return (m_numerateur*a.m_denominateur == a.m_numerateur*m_denominateur);
 }
 
+//Renvoie la valeur du numerateur
+int  ZFraction::numerateur() const {
+    return m_numerateur;
+}
+
+//Renvoie la valeur du denomiateur
+int  ZFraction::denominateur() const {
+    return m_denominateur;
+}
+
+//Convertit la fraction en nombre reel
+double ZFraction::nombreReel() const {
+    double resultat = (double)m_numerateur/m_denominateur;
+    return resultat;
+}
+
 //Surcharge d'operateurs (membres de la classe)
 ZFraction& ZFraction::operator+=(ZFraction const& a) {
     
     //a/b + c/d = a*d+c*b/b*d
-    m_numerateur   *= a.m_denominateur + a.m_numerateur*m_denominateur; 
-    m_denominateur *= a.m_denominateur;
+    m_numerateur   = m_numerateur*a.m_denominateur + a.m_numerateur*m_denominateur;
+    m_denominateur = m_denominateur*a.m_denominateur;
     simplifierFraction();
     
+    return *this;
+}
+
+ZFraction& ZFraction::operator-=(ZFraction const& a) {
+    //a/b - c/d = ad - cb / bd
+    m_numerateur   = m_numerateur*a.m_denominateur - a.m_numerateur*m_denominateur;
+    m_denominateur = m_denominateur*a.m_denominateur;
+    simplifierFraction();
     return *this;
 }
 
@@ -54,7 +65,17 @@ ZFraction& ZFraction::operator*=(ZFraction const& a) {
     m_numerateur   *= a.m_numerateur;
     m_denominateur *= a.m_denominateur;
     simplifierFraction();
+    return *this;
 }
+
+ZFraction& ZFraction::operator/=(ZFraction const& a) {
+    //a/b / c/d = a/b * d/c
+    ZFraction aInverse(a.m_denominateur,a.m_numerateur);
+    *this*=aInverse;
+    return *this;
+}
+
+
 
 //Methodes privees
 //Simplification de fractions
@@ -64,6 +85,10 @@ void ZFraction::simplifierFraction() {
         m_numerateur   /= diviseur;
         m_denominateur /= diviseur;
     }
+    if (m_denominateur < 0) {
+        m_numerateur   = -m_numerateur;
+        m_denominateur = -m_denominateur;
+    }
 }
 
 //Surcharges d'operateurs (non membres de la classe)
@@ -72,15 +97,34 @@ ostream &operator<<(ostream &flux, ZFraction const& fraction) {
     return flux;
 }
 
+//Operateur "moins unaire" (b = -a)
+ZFraction     operator-(ZFraction const& a) {
+    ZFraction copieA(a),b,negatif;
+    negatif = b - copieA;
+    return negatif;
+}
+
 ZFraction operator+(ZFraction const& a, ZFraction const& b) {
     ZFraction copieA(a); //Copie de a
     copieA += b;
     return copieA;
 }
 
+ZFraction operator-(ZFraction const& a, ZFraction const& b) {
+    ZFraction copieA(a);
+    copieA -= b;
+    return copieA;
+}
+
 ZFraction operator*(ZFraction const& a, ZFraction const& b) {
     ZFraction copieA(a);
     copieA *= b;
+    return copieA;
+}
+
+ZFraction operator/(ZFraction const& a, ZFraction const& b) {
+    ZFraction copieA(a);
+    copieA /= b;
     return copieA;
 }
 

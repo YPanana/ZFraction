@@ -7,19 +7,22 @@ class ZFraction {
     
     public:
     
-    //Constructeurs
-    ZFraction();                //1.Par defaut
-    ZFraction(int n);           //2.Juste le numerateur
-    ZFraction(int n, int d);    //3.Numerateur et denominateur
+    //Constructeur
+    ZFraction(int n = 0, int d = 1);
     
     //Methodes publiques
-    void afficher(std::ostream &flux)     const; //Afficher la fraction dans la console
-    bool estInferieur(ZFraction const& a) const; //Test si la fraction est inferieure a une autre
-    bool estEgal(ZFraction const& a)      const; //Test si la fraction est egale a une autre
+    void   afficher(std::ostream &flux)     const; //Afficher la fraction dans la console
+    bool   estInferieur(ZFraction const& a) const; //Test si la fraction est inferieure a une autre
+    bool   estEgal(ZFraction const& a)      const; //Test si la fraction est egale a une autre
+    int    numerateur()                     const; //Renvoie la valeur du numerateur
+    int    denominateur()                   const; //Renvoie la valeur du denominateur
+    double nombreReel()                     const; //Convertit la fraction en nombre reel
     
     //Surcharge d'operateurs
     ZFraction& operator+=(ZFraction const& a);
     ZFraction& operator*=(ZFraction const& a);
+    ZFraction& operator-=(ZFraction const& a);
+    ZFraction& operator/=(ZFraction const& a);
     
     private:
     
@@ -34,8 +37,11 @@ class ZFraction {
 
 //Surcharge d'operateurs
 std::ostream& operator<<(std::ostream &flux, ZFraction const& fraction);
+ZFraction     operator-(ZFraction const& a); //Operateur "moins unaire" (b = -a)
 ZFraction     operator+(ZFraction const& a, ZFraction const& b);
 ZFraction     operator*(ZFraction const& a, ZFraction const& b);
+ZFraction     operator-(ZFraction const& a, ZFraction const& b);
+ZFraction     operator/(ZFraction const& a, ZFraction const& b);
 bool          operator<(ZFraction const& a, ZFraction const& b);
 bool          operator>(ZFraction const& a, ZFraction const& b);
 bool          operator>=(ZFraction const& a, ZFraction const& b);
